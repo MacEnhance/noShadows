@@ -6,13 +6,16 @@
 //  Copyright © 2019 macenhance. All rights reserved.
 //
 
-#import "noShadows.h"
+#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
-noShadows *plugin;
+@interface noShadows : NSObject
++ (noShadows*)share;
+@end
 
 @implementation noShadows
 
-+ (noShadows*) sharedInstance {
++ (noShadows*)share {
     static noShadows* plugin = nil;
     if (plugin == nil)
         plugin = [[noShadows alloc] init];
@@ -20,23 +23,23 @@ noShadows *plugin;
 }
 
 + (void)load {
-    NSUInteger osx_ver = [[NSProcessInfo processInfo] operatingSystemVersion].minorVersion;
-    plugin = [noShadows sharedInstance];
-    [[NSNotificationCenter defaultCenter] addObserver:plugin
-                                             selector:@selector(noShadows_WindowDidBecomeKey:)
-                                                 name:NSWindowDidBecomeKeyNotification
-                                               object:nil];
-    
-    NSLog(@"%@ loaded into %@ on macOS 10.%ld", [self class], [[NSBundle mainBundle] bundleIdentifier], (long)osx_ver);
+    NSArray *globalBlacklist = [NSArray arrayWithContentsOfFile:[[NSBundle bundleForClass:self.class] pathForResource:@"blacklist" ofType:@"plist"]];
+    if (![globalBlacklist containsObject:NSBundle.mainBundle.bundleIdentifier] && ![NSUserDefaults.standardUserDefaults boolForKey:@"MEMiniMeBlacklist"]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            for (NSWindow *w in NSApp.windows)
+                [w setHasShadow:false];
+        });
+        [[NSNotificationCenter defaultCenter] addObserver:noShadows.share
+                                                 selector:@selector(noShadows_WindowDidBecomeKey:)
+                                                     name:NSWindowDidBecomeKeyNotification
+                                                   object:nil];
+    }
+    NSLog(@"%@ loaded into %@", self.className, NSProcessInfo.processInfo.operatingSystemVersionString);
 }
 
 - (void)noShadows_WindowDidBecomeKey:(NSNotification *)notification {
-    [plugin noShadows_initialize:[notification object]];
-}
-
-- (void)noShadows_initialize:(NSWindow*)theWindow {
-    //    NSLog(@"wb_ %@", [theWindow className]);
-    [theWindow setHasShadow:false];
+    NSWindow *win = [notification object];
+    [win setHasShadow:false];
 }
 
 @end

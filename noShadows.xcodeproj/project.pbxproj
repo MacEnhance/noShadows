@@ -13,8 +13,8 @@
 /* Begin PBXFileReference section */
 		FB2FE5DF23074DE10082C714 /* noShadows.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = noShadows.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB2FE5E223074DE10082C714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB2FE5E823074E390082C714 /* noShadows.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = noShadows.h; sourceTree = "<group>"; };
 		FB2FE5E923074E390082C714 /* noShadows.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = noShadows.m; sourceTree = "<group>"; };
+		FBBEC3932597D11E0026A0E5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +31,7 @@
 		FB2FE5D623074DE10082C714 = {
 			isa = PBXGroup;
 			children = (
+				FBBEC3932597D11E0026A0E5 /* README.md */,
 				FB2FE5E123074DE10082C714 /* noShadows */,
 				FB2FE5E023074DE10082C714 /* Products */,
 			);
@@ -48,7 +49,6 @@
 			isa = PBXGroup;
 			children = (
 				FB2FE5E223074DE10082C714 /* Info.plist */,
-				FB2FE5E823074E390082C714 /* noShadows.h */,
 				FB2FE5E923074E390082C714 /* noShadows.m */,
 			);
 			path = noShadows;
