@@ -10,19 +10,19 @@
 
 # Functionality:
 
-- When a window gains focus it noShaodws will try to turn off the shadows uing : `[window setHasShadow:false];`
-- Note that this doesn't effect windows with custom drawn shadows
+- When a window gains focus, noShadows will try to turn off the shadows using `[window setHasShadow:false];`
+- Note that this doesn't affect windows with custom drawn shadows
 
 # Blacklisting:
 
 - To add an app the blacklist
 
-1. Find the bundle ID of the application you want to blacklist. EG: `com.googlecode.iterm2`
+1. Find the bundle ID of the application you want to blacklist, e.g. `com.googlecode.iterm2`
 2. Open `/System/Applications/Utilities/Terminal.app`
-3. Enter the command `defaults write com.googlecode.iterm2 noSahdows -bool true`
+3. Enter the command `defaults write com.googlecode.iterm2 noShadows -bool true`
 4. Restart the application
 
-- To remove an app, replace `true` with `false`
+- To remove an app, enter the command  ``defaults delete com.googlecode.iterm2 noShadows`
 
 # Installation:
 
